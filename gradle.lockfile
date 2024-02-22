@@ -1,0 +1,7 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+com.github.java-json-tools:json-patch:1.13=compileClasspath,runtimeClasspath,testCompileClasspath,testFixturesRuntimeClasspath,testRuntimeClasspath
+org.jboss.resteasy:resteasy-jackson2-provider:6.2.4.Final=compileClasspath,runtimeClasspath,testCompileClasspath,testFixturesRuntimeClasspath,testRuntimeClasspath
+org.keycloak:keycloak-admin-client:22.0.5=compileClasspath,runtimeClasspath,testCompileClasspath,testFixturesRuntimeClasspath,testRuntimeClasspath
+empty=annotationProcessor,testAnnotationProcessor,testFixturesAnnotationProcessor,testFixturesCompileClasspath

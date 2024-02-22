@@ -1,0 +1,50 @@
+plugins {
+    id 'java-library'
+
+    //When this is not applied the test task succeeds with gradle 8.6 and 8.3
+    id 'java-test-fixtures'
+
+}
+
+repositories {
+    mavenCentral()
+}
+
+configurations.compileClasspath.incoming.beforeResolve {
+    for (def dep in it.dependencies) {
+        if (dep instanceof ModuleDependency) {
+            dep.exclude(group: "com.github.java-json-tools", module:"btf")
+            dep.exclude(group: "com.github.java-json-tools", module:"msg-simple")
+            dep.exclude(group: "com.github.java-json-tools", module:"jackson-coreutils")
+        }
+    }
+}
+
+dependencies {
+    implementation('org.keycloak:keycloak-admin-client:22.0.5') {
+//        exclude(group: "com.github.java-json-tools", module: "json-patch")
+//        exclude(group: "org.jboss.resteasy", module: "resteasy-jackson2-provider")
+
+//These are irrelevant for the problem.
+        exclude(group: "org.keycloak", module: "keycloak-core")
+        exclude(group: "org.keycloak", module: "keycloak-common")
+        exclude(group: "org.jboss.resteasy", module: "resteasy-client")
+        exclude(group: "org.jboss.resteasy", module: "resteasy-multipart-provider")
+        exclude(group: "org.jboss.resteasy", module: "resteasy-jaxb-provider")
+        exclude(group: "com.fasterxml.jackson.core", module: "*")
+        exclude(group: "com.fasterxml.jackson.module", module: "*")
+        exclude(group: "com.fasterxml.jackson.jakarta.rs", module: "*")
+        exclude(group: "org.jboss.logging", module: "jboss-logging")
+    }
+
+}
+dependencyLocking {
+    lockAllConfigurations()
+    lockMode = LockMode.STRICT
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
